@@ -1,0 +1,109 @@
+{
+  "industry": "b2b-services",
+  "compliance": {
+    "country": "AU",
+    "spam_act": "AU SPAM Act 2003",
+    "consent_required": true,
+    "opt_out_required_in": [
+      "sms",
+      "email"
+    ],
+    "include_abn_in_footer": true,
+    "include_physical_address": true
+  },
+  "instant_sms": {
+    "delay_seconds": 60,
+    "templates": [
+      "Hey {first_name}, it's {owner_name} from {business_name}. Saw your enquiry about scoping call. What problem made this land on your desk this week? Quick call today?",
+      "Hi {first_name}, thanks for reaching out about scoping call. Who else is involved in the decision (procurement, IT, finance)? Got 5 minutes to chat?",
+      "{first_name}, {owner_name} here from {business_name}. Re your scoping call enquiry: Is this budgeted this quarter or next? What's a good time?"
+    ],
+    "ps": "PS. You can reply STOP anytime and we'll take you off the list. ABN on file, address in our reply email."
+  },
+  "instant_email": {
+    "delay_seconds": 90,
+    "subject": "Re: your scoping call enquiry",
+    "body_template": "Hey {first_name},\n\nThanks for reaching out about scoping call. I'm {owner_name} from {business_name} and I wanted to reply personally before any automation does.\n\nTo make our next step useful, three quick questions:\n1. What problem made this land on your desk this week?\n2. What's the success metric you'd be measured against?\n3. What's your timeline (this week, this month, exploring)?\n\nReply when you have a couple of minutes. I read every one.\n\n{owner_signature}\n\n---\n{business_name}\n{business_address}, {business_state}\nABN {business_abn}\nReply STOP to opt out, or click {unsubscribe_url}.\n"
+  },
+  "drip_sequence": [
+    {
+      "day": 0,
+      "channel": "email",
+      "purpose": "instant_reply (above)"
+    },
+    {
+      "day": 1,
+      "channel": "email",
+      "subject": "One thing I forgot to ask about your scoping call",
+      "body_seed": "Who else is involved in the decision (procurement, IT, finance)?",
+      "intent": "soft re-engagement"
+    },
+    {
+      "day": 3,
+      "channel": "email",
+      "subject": "How a 200-FTE manufacturer got live in 6 weeks",
+      "body_seed": "Tight scope, weekly demo, no surprises at procurement.",
+      "intent": "social proof"
+    },
+    {
+      "day": 7,
+      "channel": "email",
+      "subject": "5-min read: a 1-pager with the 3 questions every buyer asks us",
+      "body_seed": "a 1-pager with the 3 questions every buyer asks us",
+      "intent": "value drop, low pressure"
+    },
+    {
+      "day": 14,
+      "channel": "email",
+      "subject": "Still thinking about scoping call?",
+      "body_seed": "the implementation timeline our top customers follow",
+      "intent": "explicit re-engagement"
+    },
+    {
+      "day": 30,
+      "channel": "email",
+      "subject": "Last note from me",
+      "body_seed": "Graceful close. Reply if you'd like me to leave the door open another 30 days.",
+      "intent": "graceful close, opt-out"
+    }
+  ],
+  "no_show_recovery": {
+    "first_touch_hours": 2,
+    "second_touch_hours": 24,
+    "channels": [
+      "sms",
+      "email"
+    ],
+    "sms_first_touch": "Hey {first_name}, missed you for the {appointment_type}. Want me to put another 30-min scope this week? Free now or later today?"
+  },
+  "lead_scoring": {
+    "form_completeness_max": 3,
+    "page_views_max": 3,
+    "utm_quality_max": 3,
+    "manual_signal_max": 4,
+    "hot_threshold": 9,
+    "manual_signals": [
+      "company size match",
+      "named DM",
+      "this-quarter budget",
+      "RFP attached"
+    ]
+  },
+  "hot_lead_handoff": {
+    "channel": "slack",
+    "include_linkedin_snapshot": true,
+    "ping_owner_immediately": true,
+    "industry_signal": "this-quarter budget + named DM"
+  },
+  "case_studies": [
+    {
+      "who": "a 200-FTE manufacturer",
+      "result": "live in 6 weeks",
+      "story": "Tight scope, weekly demo, no surprises at procurement."
+    }
+  ],
+  "value_drops": [
+    "a 1-pager with the 3 questions every buyer asks us",
+    "the implementation timeline our top customers follow"
+  ]
+}

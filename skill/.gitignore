@@ -1,0 +1,34 @@
+# State + secrets — NEVER commit
+.state/
+.env
+.env.*
+!.env.example
+tokens/
+~/.marketing-agency/
+*.local.spec.ts
+*.local.json
+
+# Build artefacts
+node_modules/
+.playwright-cache/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Zip artefacts
+*.zip
+!templates/*.zip
+
+# Logs
+*.log
+logs/

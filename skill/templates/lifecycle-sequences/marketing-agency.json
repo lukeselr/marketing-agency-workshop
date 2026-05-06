@@ -1,0 +1,109 @@
+{
+  "industry": "marketing-agency",
+  "compliance": {
+    "country": "AU",
+    "spam_act": "AU SPAM Act 2003",
+    "consent_required": true,
+    "opt_out_required_in": [
+      "sms",
+      "email"
+    ],
+    "include_abn_in_footer": true,
+    "include_physical_address": true
+  },
+  "instant_sms": {
+    "delay_seconds": 60,
+    "templates": [
+      "Hey {first_name}, it's {owner_name} from {business_name}. Saw your enquiry about growth audit. Are you currently spending on paid, organic, or both? Quick call today?",
+      "Hi {first_name}, thanks for reaching out about growth audit. Where do you think the biggest leak is right now? Got 5 minutes to chat?",
+      "{first_name}, {owner_name} here from {business_name}. Re your growth audit enquiry: Got a current agency or running it in-house? What's a good time?"
+    ],
+    "ps": "PS. You can reply STOP anytime and we'll take you off the list. ABN on file, address in our reply email."
+  },
+  "instant_email": {
+    "delay_seconds": 90,
+    "subject": "Re: your growth audit enquiry",
+    "body_template": "Hey {first_name},\n\nThanks for reaching out about growth audit. I'm {owner_name} from {business_name} and I wanted to reply personally before any automation does.\n\nTo make our next step useful, three quick questions:\n1. Are you currently spending on paid, organic, or both?\n2. What's a realistic monthly budget you're working with?\n3. What's your timeline (this week, this month, exploring)?\n\nReply when you have a couple of minutes. I read every one.\n\n{owner_signature}\n\n---\n{business_name}\n{business_address}, {business_state}\nABN {business_abn}\nReply STOP to opt out, or click {unsubscribe_url}.\n"
+  },
+  "drip_sequence": [
+    {
+      "day": 0,
+      "channel": "email",
+      "purpose": "instant_reply (above)"
+    },
+    {
+      "day": 1,
+      "channel": "email",
+      "subject": "One thing I forgot to ask about your growth audit",
+      "body_seed": "Where do you think the biggest leak is right now?",
+      "intent": "soft re-engagement"
+    },
+    {
+      "day": 3,
+      "channel": "email",
+      "subject": "How a $40k/mo trade biz got doubled qualified leads in 60 days",
+      "body_seed": "Replaced engagement campaigns with conversion + landing-page rebuild.",
+      "intent": "social proof"
+    },
+    {
+      "day": 7,
+      "channel": "email",
+      "subject": "5-min read: the 12-point audit we run free for any new account",
+      "body_seed": "the 12-point audit we run free for any new account",
+      "intent": "value drop, low pressure"
+    },
+    {
+      "day": 14,
+      "channel": "email",
+      "subject": "Still thinking about growth audit?",
+      "body_seed": "this week's competitor ad-library breakdown for your niche",
+      "intent": "explicit re-engagement"
+    },
+    {
+      "day": 30,
+      "channel": "email",
+      "subject": "Last note from me",
+      "body_seed": "Graceful close. Reply if you'd like me to leave the door open another 30 days.",
+      "intent": "graceful close, opt-out"
+    }
+  ],
+  "no_show_recovery": {
+    "first_touch_hours": 2,
+    "second_touch_hours": 24,
+    "channels": [
+      "sms",
+      "email"
+    ],
+    "sms_first_touch": "Hey {first_name}, missed you for the {appointment_type}. Want me to send the audit slot link for this week? Free now or later today?"
+  },
+  "lead_scoring": {
+    "form_completeness_max": 3,
+    "page_views_max": 3,
+    "utm_quality_max": 3,
+    "manual_signal_max": 4,
+    "hot_threshold": 9,
+    "manual_signals": [
+      "budget disclosed",
+      "current spend disclosed",
+      "decision-maker title",
+      "named pain"
+    ]
+  },
+  "hot_lead_handoff": {
+    "channel": "slack",
+    "include_linkedin_snapshot": true,
+    "ping_owner_immediately": true,
+    "industry_signal": "budget + current spend disclosed"
+  },
+  "case_studies": [
+    {
+      "who": "a $40k/mo trade biz",
+      "result": "doubled qualified leads in 60 days",
+      "story": "Replaced engagement campaigns with conversion + landing-page rebuild."
+    }
+  ],
+  "value_drops": [
+    "the 12-point audit we run free for any new account",
+    "this week's competitor ad-library breakdown for your niche"
+  ]
+}

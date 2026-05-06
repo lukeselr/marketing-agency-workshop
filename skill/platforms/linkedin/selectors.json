@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "tested_on": "2026-05-05",
+  "platform": "linkedin",
+  "notes": "Verified against linkedin.com/developers + campaignmanager 2026-05-05. October 2025 hierarchy rename — adapt accordingly.",
+  "signin": {
+    "email_input": "input[name='session_key']",
+    "password_input": "input[name='session_password']",
+    "submit": "button[type='submit']:has-text('Sign in')"
+  },
+  "dev_app": {
+    "name_input": "label:has-text('App name') input",
+    "company_input": "label:has-text('Company') input",
+    "privacy_input": "label:has-text('Privacy policy URL') input",
+    "logo_upload": "input[type='file']",
+    "agree_checkbox": "input[type='checkbox'] >> text=I have read",
+    "submit": "button:has-text('Create app')",
+    "auth_tab": "[role='tab']:has-text('Auth')",
+    "client_id": "[data-testid='client-id']",
+    "client_secret": "[data-testid='client-secret']"
+  },
+  "marketing_api_request": {
+    "request_button": "button:has-text('Marketing Developer Platform')",
+    "use_case_input": "label:has-text('Use case') textarea",
+    "submit": "button:has-text('Submit')",
+    "pending_state": "text=/Request submitted|Pending review/"
+  },
+  "oauth": {
+    "allow_button": "button:has-text('Allow')"
+  },
+  "insight_tag": {
+    "generate_button": "button:has-text('Generate tag'),button:has-text('Install tag')",
+    "snippet_display": "[data-testid='insight-tag-snippet']"
+  },
+  "leadgen": {
+    "create_button": "button:has-text('Create form')",
+    "name_input": "label:has-text('Form name') input",
+    "headline_input": "label:has-text('Headline') input",
+    "privacy_input": "label:has-text('Privacy policy URL') input",
+    "submit": "button:has-text('Save draft'),button:has-text('Create')"
+  }
+}

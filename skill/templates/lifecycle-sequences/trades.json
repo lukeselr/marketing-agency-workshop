@@ -1,0 +1,108 @@
+{
+  "industry": "trades",
+  "compliance": {
+    "country": "AU",
+    "spam_act": "AU SPAM Act 2003",
+    "consent_required": true,
+    "opt_out_required_in": [
+      "sms",
+      "email"
+    ],
+    "include_abn_in_footer": true,
+    "include_physical_address": true
+  },
+  "instant_sms": {
+    "delay_seconds": 60,
+    "templates": [
+      "Hey {first_name}, it's {owner_name} from {business_name}. Saw your enquiry about quote for {trade_service}. Are you booking the job in or just price-checking right now? Quick call today?",
+      "Hi {first_name}, thanks for reaching out about quote for {trade_service}. When do you want the work done by? Got 5 minutes to chat?",
+      "{first_name}, {owner_name} here from {business_name}. Re your quote for {trade_service} enquiry: Want me to give you a ballpark over text first? What's a good time?"
+    ],
+    "ps": "PS. You can reply STOP anytime and we'll take you off the list. ABN on file, address in our reply email."
+  },
+  "instant_email": {
+    "delay_seconds": 90,
+    "subject": "Re: your quote for {trade_service} enquiry",
+    "body_template": "Hey {first_name},\n\nThanks for reaching out about quote for {trade_service}. I'm {owner_name} from {business_name} and I wanted to reply personally before any automation does.\n\nTo make our next step useful, three quick questions:\n1. Are you booking the job in or just price-checking right now?\n2. What's the scope (rough size, materials, urgency)?\n3. What's your timeline (this week, this month, exploring)?\n\nReply when you have a couple of minutes. I read every one.\n\n{owner_signature}\n\n---\n{business_name}\n{business_address}, {business_state}\nABN {business_abn}\nReply STOP to opt out, or click {unsubscribe_url}.\n"
+  },
+  "drip_sequence": [
+    {
+      "day": 0,
+      "channel": "email",
+      "purpose": "instant_reply (above)"
+    },
+    {
+      "day": 1,
+      "channel": "email",
+      "subject": "One thing I forgot to ask about your quote for {trade_service}",
+      "body_seed": "When do you want the work done by?",
+      "intent": "soft re-engagement"
+    },
+    {
+      "day": 3,
+      "channel": "email",
+      "subject": "How a Sydney renovator got the job booked in within 7 days",
+      "body_seed": "We came on site, gave a fixed quote, and they had a start date by Friday.",
+      "intent": "social proof"
+    },
+    {
+      "day": 7,
+      "channel": "email",
+      "subject": "5-min read: the 5 questions to ask any tradie before signing the quote",
+      "body_seed": "the 5 questions to ask any tradie before signing the quote",
+      "intent": "value drop, low pressure"
+    },
+    {
+      "day": 14,
+      "channel": "email",
+      "subject": "Still thinking about quote for {trade_service}?",
+      "body_seed": "checklist: how to spot a quote that's too cheap (red flags)",
+      "intent": "explicit re-engagement"
+    },
+    {
+      "day": 30,
+      "channel": "email",
+      "subject": "Last note from me",
+      "body_seed": "Graceful close. Reply if you'd like me to leave the door open another 30 days.",
+      "intent": "graceful close, opt-out"
+    }
+  ],
+  "no_show_recovery": {
+    "first_touch_hours": 2,
+    "second_touch_hours": 12,
+    "channels": [
+      "sms",
+      "email"
+    ],
+    "sms_first_touch": "Hey {first_name}, missed you for the {appointment_type}. Want me to send a tradie out tomorrow morning for the on-site? Free now or later today?"
+  },
+  "lead_scoring": {
+    "form_completeness_max": 2,
+    "page_views_max": 2,
+    "utm_quality_max": 1,
+    "manual_signal_max": 4,
+    "hot_threshold": 6,
+    "manual_signals": [
+      "called twice",
+      "address provided",
+      "uploaded photos"
+    ]
+  },
+  "hot_lead_handoff": {
+    "channel": "slack",
+    "include_linkedin_snapshot": false,
+    "ping_owner_immediately": true,
+    "industry_signal": "provided site address + photos"
+  },
+  "case_studies": [
+    {
+      "who": "a Sydney renovator",
+      "result": "the job booked in within 7 days",
+      "story": "We came on site, gave a fixed quote, and they had a start date by Friday."
+    }
+  ],
+  "value_drops": [
+    "the 5 questions to ask any tradie before signing the quote",
+    "checklist: how to spot a quote that's too cheap (red flags)"
+  ]
+}

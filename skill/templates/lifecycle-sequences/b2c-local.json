@@ -1,0 +1,108 @@
+{
+  "industry": "b2c-local",
+  "compliance": {
+    "country": "AU",
+    "spam_act": "AU SPAM Act 2003",
+    "consent_required": true,
+    "opt_out_required_in": [
+      "sms",
+      "email"
+    ],
+    "include_abn_in_footer": true,
+    "include_physical_address": true
+  },
+  "instant_sms": {
+    "delay_seconds": 60,
+    "templates": [
+      "Hey {first_name}, it's {owner_name} from {business_name}. Saw your enquiry about local service booking. Are you in our service area? Quick call today?",
+      "Hi {first_name}, thanks for reaching out about local service booking. When were you hoping to get this done? Got 5 minutes to chat?",
+      "{first_name}, {owner_name} here from {business_name}. Re your local service booking enquiry: Looking for a one-off or ongoing? What's a good time?"
+    ],
+    "ps": "PS. You can reply STOP anytime and we'll take you off the list. ABN on file, address in our reply email."
+  },
+  "instant_email": {
+    "delay_seconds": 90,
+    "subject": "Re: your local service booking enquiry",
+    "body_template": "Hey {first_name},\n\nThanks for reaching out about local service booking. I'm {owner_name} from {business_name} and I wanted to reply personally before any automation does.\n\nTo make our next step useful, three quick questions:\n1. Are you in our service area?\n2. Anything urgent we should know about?\n3. What's your timeline (this week, this month, exploring)?\n\nReply when you have a couple of minutes. I read every one.\n\n{owner_signature}\n\n---\n{business_name}\n{business_address}, {business_state}\nABN {business_abn}\nReply STOP to opt out, or click {unsubscribe_url}.\n"
+  },
+  "drip_sequence": [
+    {
+      "day": 0,
+      "channel": "email",
+      "purpose": "instant_reply (above)"
+    },
+    {
+      "day": 1,
+      "channel": "email",
+      "subject": "One thing I forgot to ask about your local service booking",
+      "body_seed": "When were you hoping to get this done?",
+      "intent": "soft re-engagement"
+    },
+    {
+      "day": 3,
+      "channel": "email",
+      "subject": "How a Burleigh local got booked, paid, done in 48 hours",
+      "body_seed": "Texted back inside an hour, on site the next day, paid same evening.",
+      "intent": "social proof"
+    },
+    {
+      "day": 7,
+      "channel": "email",
+      "subject": "5-min read: this month's local-only specials",
+      "body_seed": "this month's local-only specials",
+      "intent": "value drop, low pressure"
+    },
+    {
+      "day": 14,
+      "channel": "email",
+      "subject": "Still thinking about local service booking?",
+      "body_seed": "what to expect on the day (a 2-min read)",
+      "intent": "explicit re-engagement"
+    },
+    {
+      "day": 30,
+      "channel": "email",
+      "subject": "Last note from me",
+      "body_seed": "Graceful close. Reply if you'd like me to leave the door open another 30 days.",
+      "intent": "graceful close, opt-out"
+    }
+  ],
+  "no_show_recovery": {
+    "first_touch_hours": 1,
+    "second_touch_hours": 6,
+    "channels": [
+      "sms",
+      "email"
+    ],
+    "sms_first_touch": "Hey {first_name}, missed you for the {appointment_type}. Want me to put another time in tomorrow? Free now or later today?"
+  },
+  "lead_scoring": {
+    "form_completeness_max": 2,
+    "page_views_max": 2,
+    "utm_quality_max": 2,
+    "manual_signal_max": 4,
+    "hot_threshold": 6,
+    "manual_signals": [
+      "postcode in service area",
+      "urgent flag",
+      "weekend slot"
+    ]
+  },
+  "hot_lead_handoff": {
+    "channel": "slack",
+    "include_linkedin_snapshot": false,
+    "ping_owner_immediately": true,
+    "industry_signal": "postcode + urgency flag"
+  },
+  "case_studies": [
+    {
+      "who": "a Burleigh local",
+      "result": "booked, paid, done in 48 hours",
+      "story": "Texted back inside an hour, on site the next day, paid same evening."
+    }
+  ],
+  "value_drops": [
+    "this month's local-only specials",
+    "what to expect on the day (a 2-min read)"
+  ]
+}

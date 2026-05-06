@@ -1,0 +1,108 @@
+{
+  "industry": "hospitality",
+  "compliance": {
+    "country": "AU",
+    "spam_act": "AU SPAM Act 2003",
+    "consent_required": true,
+    "opt_out_required_in": [
+      "sms",
+      "email"
+    ],
+    "include_abn_in_footer": true,
+    "include_physical_address": true
+  },
+  "instant_sms": {
+    "delay_seconds": 60,
+    "templates": [
+      "Hey {first_name}, it's {owner_name} from {business_name}. Saw your enquiry about {venue_name} booking or function. Is this for a date / a group / a function? Quick call today?",
+      "Hi {first_name}, thanks for reaching out about {venue_name} booking or function. How many guests and what date are you targeting? Got 5 minutes to chat?",
+      "{first_name}, {owner_name} here from {business_name}. Re your {venue_name} booking or function enquiry: Any dietary or accessibility needs we should know? What's a good time?"
+    ],
+    "ps": "PS. You can reply STOP anytime and we'll take you off the list. ABN on file, address in our reply email."
+  },
+  "instant_email": {
+    "delay_seconds": 90,
+    "subject": "Re: your {venue_name} booking or function enquiry",
+    "body_template": "Hey {first_name},\n\nThanks for reaching out about {venue_name} booking or function. I'm {owner_name} from {business_name} and I wanted to reply personally before any automation does.\n\nTo make our next step useful, three quick questions:\n1. Is this for a date / a group / a function?\n2. Are you a regular or first-timer?\n3. What's your timeline (this week, this month, exploring)?\n\nReply when you have a couple of minutes. I read every one.\n\n{owner_signature}\n\n---\n{business_name}\n{business_address}, {business_state}\nABN {business_abn}\nReply STOP to opt out, or click {unsubscribe_url}.\n"
+  },
+  "drip_sequence": [
+    {
+      "day": 0,
+      "channel": "email",
+      "purpose": "instant_reply (above)"
+    },
+    {
+      "day": 1,
+      "channel": "email",
+      "subject": "One thing I forgot to ask about your {venue_name} booking or function",
+      "body_seed": "How many guests and what date are you targeting?",
+      "intent": "soft re-engagement"
+    },
+    {
+      "day": 3,
+      "channel": "email",
+      "subject": "How a 30-person engagement got the room locked in 24 hours later",
+      "body_seed": "Sent the menu PDF, locked the deposit on the same call.",
+      "intent": "social proof"
+    },
+    {
+      "day": 7,
+      "channel": "email",
+      "subject": "5-min read: this month's chef-special tasting menu (members only)",
+      "body_seed": "this month's chef-special tasting menu (members only)",
+      "intent": "value drop, low pressure"
+    },
+    {
+      "day": 14,
+      "channel": "email",
+      "subject": "Still thinking about {venue_name} booking or function?",
+      "body_seed": "the 5 best off-peak time slots in {month}",
+      "intent": "explicit re-engagement"
+    },
+    {
+      "day": 30,
+      "channel": "email",
+      "subject": "Last note from me",
+      "body_seed": "Graceful close. Reply if you'd like me to leave the door open another 30 days.",
+      "intent": "graceful close, opt-out"
+    }
+  ],
+  "no_show_recovery": {
+    "first_touch_hours": 1,
+    "second_touch_hours": 4,
+    "channels": [
+      "sms",
+      "email"
+    ],
+    "sms_first_touch": "Hey {first_name}, missed you for the {appointment_type}. Want to lock the same time tomorrow night? Free now or later today?"
+  },
+  "lead_scoring": {
+    "form_completeness_max": 2,
+    "page_views_max": 2,
+    "utm_quality_max": 2,
+    "manual_signal_max": 4,
+    "hot_threshold": 6,
+    "manual_signals": [
+      "function enquiry",
+      "group >8",
+      "weekend slot"
+    ]
+  },
+  "hot_lead_handoff": {
+    "channel": "slack",
+    "include_linkedin_snapshot": false,
+    "ping_owner_immediately": true,
+    "industry_signal": "function enquiry + group >8"
+  },
+  "case_studies": [
+    {
+      "who": "a 30-person engagement",
+      "result": "the room locked in 24 hours later",
+      "story": "Sent the menu PDF, locked the deposit on the same call."
+    }
+  ],
+  "value_drops": [
+    "this month's chef-special tasting menu (members only)",
+    "the 5 best off-peak time slots in {month}"
+  ]
+}

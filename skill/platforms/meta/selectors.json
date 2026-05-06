@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "tested_on": "2026-05-05",
+  "platform": "meta",
+  "notes": "Selectors verified against business.facebook.com 2026-05-05. UI drift expected. Run shared/selectors-version-check.sh to detect drift.",
+  "signin": {
+    "email_input": "input[name='email']",
+    "password_input": "input[name='pass']",
+    "submit_button": "button[name='login']"
+  },
+  "business_manager": {
+    "create_button": "button:has-text('Create Business')",
+    "name_input": "label:has-text('Business name') input",
+    "user_input": "label:has-text('Your name') input",
+    "email_input": "label:has-text('Business email') input",
+    "submit": "button:has-text('Submit'),button:has-text('Create')"
+  },
+  "ad_account": {
+    "add_button": "button:has-text('Add'),button:has-text('Create new ad account')",
+    "name": "label:has-text('Ad account name') input",
+    "timezone": "label:has-text('Time zone') input",
+    "currency": "label:has-text('Currency') input",
+    "submit": "button:has-text('Create'),button:has-text('Next')"
+  },
+  "system_user": {
+    "add_button": "button:has-text('Add system user'),button:has-text('Create system user')",
+    "name": "label:has-text('Name') input",
+    "role": "label:has-text('Role') select",
+    "submit": "button:has-text('Create')",
+    "generate_token": "button:has-text('Generate token')",
+    "token_display": "[data-testid='access-token-display']"
+  },
+  "pixel": {
+    "connect_button": "button:has-text('Connect data source'),button:has-text('Add data source')",
+    "web_option": "text=Web",
+    "name_input": "label:has-text('Name') input"
+  },
+  "capi": {
+    "tab": "[role=tab]:has-text('Conversions API')",
+    "manual_setup": "button:has-text('Set up manually')",
+    "token_display": "[data-testid='capi-access-token']"
+  },
+  "leadgen": {
+    "create_form": "button:has-text('Create form')",
+    "name_input": "label:has-text('Form name') input",
+    "save_draft": "button:has-text('Save draft')"
+  }
+}

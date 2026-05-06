@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "tested_on": "2026-05-05",
+  "platform": "google-ads",
+  "notes": "Verified against ads.google.com + console.cloud.google.com 2026-05-05. Aaron Young / Solutions 8 / John Moran patterns baked in.",
+  "cloud_project": {
+    "name_input": "label:has-text('Project name') input",
+    "submit": "button:has-text('Create')"
+  },
+  "mcc": {
+    "name": "label:has-text('Manager account name') input",
+    "country": "label:has-text('Country') select",
+    "timezone": "label:has-text('Time zone') select",
+    "currency": "label:has-text('Currency') select",
+    "submit": "button:has-text('Submit'),button:has-text('Continue')"
+  },
+  "developer_token": {
+    "apply_button": "button:has-text('Apply for token')",
+    "use_case": "label:has-text('Use case') textarea",
+    "agree": "input[type='checkbox']",
+    "submit": "button:has-text('Submit')",
+    "token_display": "[data-testid='developer-token']"
+  },
+  "oauth": {
+    "configure_consent": "button:has-text('Configure consent screen')",
+    "external_radio": "input[type='radio']:near(:text('External'))",
+    "create_credentials": "button:has-text('Create credentials')",
+    "type_select": "label:has-text('Application type') select",
+    "name": "label:has-text('Name') input",
+    "client_id_display": "[data-testid='oauth-client-id']",
+    "client_secret_display": "[data-testid='oauth-client-secret']"
+  },
+  "conversion": {
+    "name": "label:has-text('Conversion name') input",
+    "category": "label:has-text('Category') select",
+    "value_checkbox": "label:has-text('Value') input[type='checkbox']",
+    "ec4w_checkbox": "label:has-text('Enhanced conversions for web') input[type='checkbox']",
+    "ec4l_checkbox": "label:has-text('Enhanced conversions for leads') input[type='checkbox']",
+    "submit": "button:has-text('Save and continue')"
+  },
+  "campaign": {
+    "name": "label:has-text('Campaign name') input",
+    "status_select": "label:has-text('Status') select",
+    "bid_strategy_select": "label:has-text('Bid strategy') select",
+    "submit": "button:has-text('Save'),button:has-text('Create campaign')"
+  }
+}

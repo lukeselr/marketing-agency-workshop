@@ -1,0 +1,109 @@
+{
+  "industry": "saas",
+  "compliance": {
+    "country": "AU",
+    "spam_act": "AU SPAM Act 2003",
+    "consent_required": true,
+    "opt_out_required_in": [
+      "sms",
+      "email"
+    ],
+    "include_abn_in_footer": true,
+    "include_physical_address": true
+  },
+  "instant_sms": {
+    "delay_seconds": 60,
+    "templates": [
+      "Hey {first_name}, it's {owner_name} from {business_name}. Saw your enquiry about {product_name} trial or demo. What problem are you trying to solve with {product_name}? Quick call today?",
+      "Hi {first_name}, thanks for reaching out about {product_name} trial or demo. Are you evaluating tools or already locked in on us? Got 5 minutes to chat?",
+      "{first_name}, {owner_name} here from {business_name}. Re your {product_name} trial or demo enquiry: How many users would be on this if you went forward? What's a good time?"
+    ],
+    "ps": "PS. You can reply STOP anytime and we'll take you off the list. ABN on file, address in our reply email."
+  },
+  "instant_email": {
+    "delay_seconds": 90,
+    "subject": "Re: your {product_name} trial or demo enquiry",
+    "body_template": "Hey {first_name},\n\nThanks for reaching out about {product_name} trial or demo. I'm {owner_name} from {business_name} and I wanted to reply personally before any automation does.\n\nTo make our next step useful, three quick questions:\n1. What problem are you trying to solve with {product_name}?\n2. What's the deadline driving this evaluation?\n3. What's your timeline (this week, this month, exploring)?\n\nReply when you have a couple of minutes. I read every one.\n\n{owner_signature}\n\n---\n{business_name}\n{business_address}, {business_state}\nABN {business_abn}\nReply STOP to opt out, or click {unsubscribe_url}.\n"
+  },
+  "drip_sequence": [
+    {
+      "day": 0,
+      "channel": "email",
+      "purpose": "instant_reply (above)"
+    },
+    {
+      "day": 1,
+      "channel": "email",
+      "subject": "One thing I forgot to ask about your {product_name} trial or demo",
+      "body_seed": "Are you evaluating tools or already locked in on us?",
+      "intent": "soft re-engagement"
+    },
+    {
+      "day": 3,
+      "channel": "email",
+      "subject": "How a 12-person team in fintech got their first reportable win in week 2",
+      "body_seed": "Onboarded Tuesday, hit ROI signal the next Tuesday.",
+      "intent": "social proof"
+    },
+    {
+      "day": 7,
+      "channel": "email",
+      "subject": "5-min read: the implementation playbook our top 10% of customers use",
+      "body_seed": "the implementation playbook our top 10% of customers use",
+      "intent": "value drop, low pressure"
+    },
+    {
+      "day": 14,
+      "channel": "email",
+      "subject": "Still thinking about {product_name} trial or demo?",
+      "body_seed": "a 5-min Loom showing the 3 wins customers hit in week 1",
+      "intent": "explicit re-engagement"
+    },
+    {
+      "day": 30,
+      "channel": "email",
+      "subject": "Last note from me",
+      "body_seed": "Graceful close. Reply if you'd like me to leave the door open another 30 days.",
+      "intent": "graceful close, opt-out"
+    }
+  ],
+  "no_show_recovery": {
+    "first_touch_hours": 2,
+    "second_touch_hours": 24,
+    "channels": [
+      "sms",
+      "email"
+    ],
+    "sms_first_touch": "Hey {first_name}, missed you for the {appointment_type}. Want me to slot another 20 minutes this week? Free now or later today?"
+  },
+  "lead_scoring": {
+    "form_completeness_max": 2,
+    "page_views_max": 3,
+    "utm_quality_max": 3,
+    "manual_signal_max": 4,
+    "hot_threshold": 9,
+    "manual_signals": [
+      "company size matches ICP",
+      "demo requested",
+      "pricing page repeat-visit",
+      "decision-maker title"
+    ]
+  },
+  "hot_lead_handoff": {
+    "channel": "slack",
+    "include_linkedin_snapshot": true,
+    "ping_owner_immediately": true,
+    "industry_signal": "DM title + pricing page repeat-visit"
+  },
+  "case_studies": [
+    {
+      "who": "a 12-person team in fintech",
+      "result": "their first reportable win in week 2",
+      "story": "Onboarded Tuesday, hit ROI signal the next Tuesday."
+    }
+  ],
+  "value_drops": [
+    "the implementation playbook our top 10% of customers use",
+    "a 5-min Loom showing the 3 wins customers hit in week 1"
+  ]
+}

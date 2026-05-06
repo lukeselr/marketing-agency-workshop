@@ -1,0 +1,108 @@
+{
+  "industry": "salon",
+  "compliance": {
+    "country": "AU",
+    "spam_act": "AU SPAM Act 2003",
+    "consent_required": true,
+    "opt_out_required_in": [
+      "sms",
+      "email"
+    ],
+    "include_abn_in_footer": true,
+    "include_physical_address": true
+  },
+  "instant_sms": {
+    "delay_seconds": 60,
+    "templates": [
+      "Hey {first_name}, it's {owner_name} from {business_name}. Saw your enquiry about appointment. First time with us, or a return visit? Quick call today?",
+      "Hi {first_name}, thanks for reaching out about appointment. Got a stylist preference or a recommendation? Got 5 minutes to chat?",
+      "{first_name}, {owner_name} here from {business_name}. Re your appointment enquiry: Bringing any inspo photos? What's a good time?"
+    ],
+    "ps": "PS. You can reply STOP anytime and we'll take you off the list. ABN on file, address in our reply email."
+  },
+  "instant_email": {
+    "delay_seconds": 90,
+    "subject": "Re: your appointment enquiry",
+    "body_template": "Hey {first_name},\n\nThanks for reaching out about appointment. I'm {owner_name} from {business_name} and I wanted to reply personally before any automation does.\n\nTo make our next step useful, three quick questions:\n1. First time with us, or a return visit?\n2. What date were you hoping for?\n3. What's your timeline (this week, this month, exploring)?\n\nReply when you have a couple of minutes. I read every one.\n\n{owner_signature}\n\n---\n{business_name}\n{business_address}, {business_state}\nABN {business_abn}\nReply STOP to opt out, or click {unsubscribe_url}.\n"
+  },
+  "drip_sequence": [
+    {
+      "day": 0,
+      "channel": "email",
+      "purpose": "instant_reply (above)"
+    },
+    {
+      "day": 1,
+      "channel": "email",
+      "subject": "One thing I forgot to ask about your appointment",
+      "body_seed": "Got a stylist preference or a recommendation?",
+      "intent": "soft re-engagement"
+    },
+    {
+      "day": 3,
+      "channel": "email",
+      "subject": "How a balayage refresh client got rebooked within 30 days",
+      "body_seed": "Texted a maintenance reminder + member rebate, they were back in three weeks.",
+      "intent": "social proof"
+    },
+    {
+      "day": 7,
+      "channel": "email",
+      "subject": "5-min read: this season's most-booked colour treatments",
+      "body_seed": "this season's most-booked colour treatments",
+      "intent": "value drop, low pressure"
+    },
+    {
+      "day": 14,
+      "channel": "email",
+      "subject": "Still thinking about appointment?",
+      "body_seed": "the 5 questions to ask before any colour appointment",
+      "intent": "explicit re-engagement"
+    },
+    {
+      "day": 30,
+      "channel": "email",
+      "subject": "Last note from me",
+      "body_seed": "Graceful close. Reply if you'd like me to leave the door open another 30 days.",
+      "intent": "graceful close, opt-out"
+    }
+  ],
+  "no_show_recovery": {
+    "first_touch_hours": 1,
+    "second_touch_hours": 4,
+    "channels": [
+      "sms",
+      "email"
+    ],
+    "sms_first_touch": "Hey {first_name}, missed you for the {appointment_type}. Want me to slot another time this Saturday? Free now or later today?"
+  },
+  "lead_scoring": {
+    "form_completeness_max": 2,
+    "page_views_max": 2,
+    "utm_quality_max": 2,
+    "manual_signal_max": 4,
+    "hot_threshold": 6,
+    "manual_signals": [
+      "specific service named",
+      "Saturday slot",
+      "stylist named"
+    ]
+  },
+  "hot_lead_handoff": {
+    "channel": "slack",
+    "include_linkedin_snapshot": false,
+    "ping_owner_immediately": true,
+    "industry_signal": "Saturday slot + service named"
+  },
+  "case_studies": [
+    {
+      "who": "a balayage refresh client",
+      "result": "rebooked within 30 days",
+      "story": "Texted a maintenance reminder + member rebate, they were back in three weeks."
+    }
+  ],
+  "value_drops": [
+    "this season's most-booked colour treatments",
+    "the 5 questions to ask before any colour appointment"
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "industry": "gym",
+  "compliance": {
+    "country": "AU",
+    "spam_act": "AU SPAM Act 2003",
+    "consent_required": true,
+    "opt_out_required_in": [
+      "sms",
+      "email"
+    ],
+    "include_abn_in_footer": true,
+    "include_physical_address": true
+  },
+  "instant_sms": {
+    "delay_seconds": 60,
+    "templates": [
+      "Hey {first_name}, it's {owner_name} from {business_name}. Saw your enquiry about trial session or membership. Looking for a trial, a transfer from another gym, or your first time training? Quick call today?",
+      "Hi {first_name}, thanks for reaching out about trial session or membership. What's the goal \u2014 strength, fat loss, sport, just movement? Got 5 minutes to chat?",
+      "{first_name}, {owner_name} here from {business_name}. Re your trial session or membership enquiry: Got any injuries we should program around? What's a good time?"
+    ],
+    "ps": "PS. You can reply STOP anytime and we'll take you off the list. ABN on file, address in our reply email."
+  },
+  "instant_email": {
+    "delay_seconds": 90,
+    "subject": "Re: your trial session or membership enquiry",
+    "body_template": "Hey {first_name},\n\nThanks for reaching out about trial session or membership. I'm {owner_name} from {business_name} and I wanted to reply personally before any automation does.\n\nTo make our next step useful, three quick questions:\n1. Looking for a trial, a transfer from another gym, or your first time training?\n2. When are you hoping to start?\n3. What's your timeline (this week, this month, exploring)?\n\nReply when you have a couple of minutes. I read every one.\n\n{owner_signature}\n\n---\n{business_name}\n{business_address}, {business_state}\nABN {business_abn}\nReply STOP to opt out, or click {unsubscribe_url}.\n"
+  },
+  "drip_sequence": [
+    {
+      "day": 0,
+      "channel": "email",
+      "purpose": "instant_reply (above)"
+    },
+    {
+      "day": 1,
+      "channel": "email",
+      "subject": "One thing I forgot to ask about your trial session or membership",
+      "body_seed": "What's the goal \u2014 strength, fat loss, sport, just movement?",
+      "intent": "soft re-engagement"
+    },
+    {
+      "day": 3,
+      "channel": "email",
+      "subject": "How a 38-year-old with a desk job got first PB inside 8 weeks",
+      "body_seed": "Built a beginner block around their schedule, kept it stupidly simple.",
+      "intent": "social proof"
+    },
+    {
+      "day": 7,
+      "channel": "email",
+      "subject": "5-min read: our member-only programming guide for your goal",
+      "body_seed": "our member-only programming guide for your goal",
+      "intent": "value drop, low pressure"
+    },
+    {
+      "day": 14,
+      "channel": "email",
+      "subject": "Still thinking about trial session or membership?",
+      "body_seed": "the 7 things we do differently to other gyms in the area",
+      "intent": "explicit re-engagement"
+    },
+    {
+      "day": 30,
+      "channel": "email",
+      "subject": "Last note from me",
+      "body_seed": "Graceful close. Reply if you'd like me to leave the door open another 30 days.",
+      "intent": "graceful close, opt-out"
+    }
+  ],
+  "no_show_recovery": {
+    "first_touch_hours": 2,
+    "second_touch_hours": 24,
+    "channels": [
+      "sms",
+      "email"
+    ],
+    "sms_first_touch": "Hey {first_name}, missed you for the {appointment_type}. Want me to lock another trial this week? Free now or later today?"
+  },
+  "lead_scoring": {
+    "form_completeness_max": 3,
+    "page_views_max": 2,
+    "utm_quality_max": 2,
+    "manual_signal_max": 3,
+    "hot_threshold": 7,
+    "manual_signals": [
+      "specific goal named",
+      "transfer from another gym",
+      "trial booked"
+    ]
+  },
+  "hot_lead_handoff": {
+    "channel": "slack",
+    "include_linkedin_snapshot": false,
+    "ping_owner_immediately": true,
+    "industry_signal": "trial booked + goal named"
+  },
+  "case_studies": [
+    {
+      "who": "a 38-year-old with a desk job",
+      "result": "first PB inside 8 weeks",
+      "story": "Built a beginner block around their schedule, kept it stupidly simple."
+    }
+  ],
+  "value_drops": [
+    "our member-only programming guide for your goal",
+    "the 7 things we do differently to other gyms in the area"
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "industry": "health",
+  "compliance": {
+    "country": "AU",
+    "spam_act": "AU SPAM Act 2003",
+    "consent_required": true,
+    "opt_out_required_in": [
+      "sms",
+      "email"
+    ],
+    "include_abn_in_footer": true,
+    "include_physical_address": true
+  },
+  "instant_sms": {
+    "delay_seconds": 60,
+    "templates": [
+      "Hey {first_name}, it's {owner_name} from {business_name}. Saw your enquiry about {treatment} consult. Are you booking for the first time, or a return visit? Quick call today?",
+      "Hi {first_name}, thanks for reaching out about {treatment} consult. What's the symptom or goal that brought you here? Got 5 minutes to chat?",
+      "{first_name}, {owner_name} here from {business_name}. Re your {treatment} consult enquiry: Any private health cover we should check on the rebate? What's a good time?"
+    ],
+    "ps": "PS. You can reply STOP anytime and we'll take you off the list. ABN on file, address in our reply email."
+  },
+  "instant_email": {
+    "delay_seconds": 90,
+    "subject": "Re: your {treatment} consult enquiry",
+    "body_template": "Hey {first_name},\n\nThanks for reaching out about {treatment} consult. I'm {owner_name} from {business_name} and I wanted to reply personally before any automation does.\n\nTo make our next step useful, three quick questions:\n1. Are you booking for the first time, or a return visit?\n2. When did the issue start and what have you already tried?\n3. What's your timeline (this week, this month, exploring)?\n\nReply when you have a couple of minutes. I read every one.\n\n{owner_signature}\n\n---\n{business_name}\n{business_address}, {business_state}\nABN {business_abn}\nReply STOP to opt out, or click {unsubscribe_url}.\n"
+  },
+  "drip_sequence": [
+    {
+      "day": 0,
+      "channel": "email",
+      "purpose": "instant_reply (above)"
+    },
+    {
+      "day": 1,
+      "channel": "email",
+      "subject": "One thing I forgot to ask about your {treatment} consult",
+      "body_seed": "What's the symptom or goal that brought you here?",
+      "intent": "soft re-engagement"
+    },
+    {
+      "day": 3,
+      "channel": "email",
+      "subject": "How a 42-year-old with chronic neck pain got back to full-range in 6 sessions",
+      "body_seed": "We mapped a plan, kept it conservative, and they were back at the gym inside 6 weeks.",
+      "intent": "social proof"
+    },
+    {
+      "day": 7,
+      "channel": "email",
+      "subject": "5-min read: the at-home routine 80% of our patients use between visits",
+      "body_seed": "the at-home routine 80% of our patients use between visits",
+      "intent": "value drop, low pressure"
+    },
+    {
+      "day": 14,
+      "channel": "email",
+      "subject": "Still thinking about {treatment} consult?",
+      "body_seed": "what to expect at your first session (5-min read, no jargon)",
+      "intent": "explicit re-engagement"
+    },
+    {
+      "day": 30,
+      "channel": "email",
+      "subject": "Last note from me",
+      "body_seed": "Graceful close. Reply if you'd like me to leave the door open another 30 days.",
+      "intent": "graceful close, opt-out"
+    }
+  ],
+  "no_show_recovery": {
+    "first_touch_hours": 2,
+    "second_touch_hours": 24,
+    "channels": [
+      "sms",
+      "email"
+    ],
+    "sms_first_touch": "Hey {first_name}, missed you for the {appointment_type}. Want me to slot you into our cancellation list this week? Free now or later today?"
+  },
+  "lead_scoring": {
+    "form_completeness_max": 4,
+    "page_views_max": 2,
+    "utm_quality_max": 1,
+    "manual_signal_max": 3,
+    "hot_threshold": 7,
+    "manual_signals": [
+      "referral letter uploaded",
+      "private cover flagged",
+      "specific condition named"
+    ]
+  },
+  "hot_lead_handoff": {
+    "channel": "slack",
+    "include_linkedin_snapshot": false,
+    "ping_owner_immediately": true,
+    "industry_signal": "specific condition named + cover confirmed"
+  },
+  "case_studies": [
+    {
+      "who": "a 42-year-old with chronic neck pain",
+      "result": "back to full-range in 6 sessions",
+      "story": "We mapped a plan, kept it conservative, and they were back at the gym inside 6 weeks."
+    }
+  ],
+  "value_drops": [
+    "the at-home routine 80% of our patients use between visits",
+    "what to expect at your first session (5-min read, no jargon)"
+  ]
+}

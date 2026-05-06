@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{HERO_HEADLINE}} — {{BUSINESS_NAME}}</title>
+<meta name="description" content="{{META_DESCRIPTION}}">
+<style>
+:root { --fg:#111; --bg:#fff; --accent:#7c3aed; --muted:#666; }
+* { box-sizing: border-box; }
+body { font: 17px/1.55 -apple-system,system-ui,sans-serif; color: var(--fg); background: var(--bg); margin: 0; }
+.wrap { max-width: 720px; margin: 0 auto; padding: 24px; }
+h1 { font-size: clamp(28px, 6vw, 44px); line-height: 1.15; margin: 0 0 12px; }
+h2 { font-size: 22px; margin: 32px 0 8px; }
+.cta { display: inline-block; background: var(--accent); color: #fff; padding: 14px 24px; border-radius: 10px; text-decoration: none; font-weight: 600; }
+.proof { display: grid; gap: 12px; margin: 24px 0; padding: 16px; background: #fafafa; border-radius: 10px; }
+.value { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 16px; margin: 16px 0; }
+.value .item { padding: 12px; border-left: 3px solid var(--accent); }
+.faq dt { font-weight: 600; margin-top: 12px; }
+.faq dd { margin: 4px 0 0; color: var(--muted); }
+form { margin: 24px 0; }
+input,textarea { width: 100%; padding: 12px; font: inherit; border: 1px solid #ddd; border-radius: 8px; }
+button { background: var(--accent); color: #fff; border: 0; padding: 14px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+footer { color: var(--muted); font-size: 13px; margin: 48px 0 24px; }
+</style>
+<!-- TRACKING_HEAD_INJECT -->
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <h1>{{HERO_HEADLINE}}</h1>
+    <p>{{HERO_SUB}}</p>
+    <a href="#cta" class="cta">{{PRIMARY_CTA_TEXT}}</a>
+  </header>
+
+  <section class="proof" aria-label="Social proof">
+    {{SOCIAL_PROOF_BLOCKS}}
+  </section>
+
+  <section class="value">
+    {{VALUE_PROPS}}
+  </section>
+
+  <section class="faq">
+    <h2>Common questions</h2>
+    <dl>{{FAQ_BLOCKS}}</dl>
+  </section>
+
+  <section id="cta">
+    <h2>{{CTA_HEADLINE}}</h2>
+    <form action="{{FORM_ENDPOINT}}" method="post">
+      <input name="name" placeholder="Your name" required>
+      <input name="email" type="email" placeholder="Your email" required>
+      <input name="phone" type="tel" placeholder="Phone (optional)">
+      <button type="submit">{{PRIMARY_CTA_TEXT}}</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© {{YEAR}} {{BUSINESS_NAME}}. <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+  </footer>
+</main>
+<!-- TRACKING_BODY_INJECT -->
+</body>
+</html>

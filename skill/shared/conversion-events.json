@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "generated_for": "marketing-agency",
+  "tested_on": "2026-05-05",
+  "notes": "Canonical conversion taxonomy. Cross-platform mapping. Update version when adding events. Migration script handles upgrades.",
+  "events": {
+    "page_view": {
+      "meta": "PageView",
+      "google_ads": "page_view",
+      "linkedin": "page_view",
+      "ga4": "page_view"
+    },
+    "view_content": {
+      "meta": "ViewContent",
+      "google_ads": "view_item",
+      "linkedin": "view_content",
+      "ga4": "view_item"
+    },
+    "lead": {
+      "meta": "Lead",
+      "google_ads": "lead",
+      "linkedin": "Lead",
+      "ga4": "generate_lead"
+    },
+    "complete_registration": {
+      "meta": "CompleteRegistration",
+      "google_ads": "sign_up",
+      "linkedin": "Signup",
+      "ga4": "sign_up"
+    },
+    "schedule": {
+      "meta": "Schedule",
+      "google_ads": "book_appointment",
+      "linkedin": "Schedule",
+      "ga4": "book_appointment"
+    },
+    "initiate_checkout": {
+      "meta": "InitiateCheckout",
+      "google_ads": "begin_checkout",
+      "linkedin": "AddToCart",
+      "ga4": "begin_checkout"
+    },
+    "purchase": {
+      "meta": "Purchase",
+      "google_ads": "purchase",
+      "linkedin": "Purchase",
+      "ga4": "purchase"
+    },
+    "subscribe": {
+      "meta": "Subscribe",
+      "google_ads": "subscribe",
+      "linkedin": "Subscribe",
+      "ga4": "subscribe"
+    },
+    "contact": {
+      "meta": "Contact",
+      "google_ads": "contact",
+      "linkedin": "Contact",
+      "ga4": "contact"
+    }
+  },
+  "value_currency_default": "AUD",
+  "kill_rules_thresholds": {
+    "cpa_x_target": 3,
+    "ctr_min_pct": 0.5,
+    "spend_no_conv_aud": 50
+  }
+}

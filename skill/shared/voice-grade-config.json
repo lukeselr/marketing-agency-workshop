@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "tested_on": "2026-05-05",
+  "notes": "5-axis critic config. Mirrors content-engine. All Phase 7 ad creative is graded on these axes before reaching the user.",
+  "axes": {
+    "specificity": {
+      "weight": 1.0,
+      "rule": "Concrete numbers, names, places. Penalise vague claims."
+    },
+    "voice_match": {
+      "weight": 1.2,
+      "rule": "Matches voice-fingerprint.json — sentence length, vocabulary, idiom cadence."
+    },
+    "conviction": {
+      "weight": 1.0,
+      "rule": "Strong stance, no hedging."
+    },
+    "tension": {
+      "weight": 0.8,
+      "rule": "Surfaces a real before/after delta — not generic benefit copy."
+    },
+    "hook_strength": {
+      "weight": 1.1,
+      "rule": "First 3 seconds / first line stops the scroll."
+    }
+  },
+  "firewalls": {
+    "rules": [
+      {"id": "no_em_dashes", "rule": "Never use em dashes (—). Use commas, full stops, or split sentences."},
+      {"id": "no_refund_promises", "rule": "Never offer refunds, money-back guarantees, or satisfaction guarantees in any marketing copy."},
+      {"id": "no_personal_finance_in_marketing", "rule": "Never mix personal finance, accounting, banking, tax, or bankruptcy content into marketing material."},
+      {"id": "no_outcome_guarantees", "rule": "Never promise a finished or running outcome (built, owned, complete). Use process language: walk through, hands-on install, set up together."},
+      {"id": "no_support_promises", "rule": "Never promise ongoing support, weekly Q&A, helpdesk, or post-purchase office hours unless that product literally ships with them."},
+      {"id": "no_drop_in_invites", "rule": "Never invite casual drop-ins or free chats. No 'come say hi', 'drop in', 'stop by', 'swing past'."},
+      {"id": "no_fabricated_facts", "rule": "Never invent venues, addresses, dates, prices, names, IDs, or contact info. If unverified, mark TBC and ask the owner."}
+    ],
+    "behaviour": "hard_fail_and_rewrite",
+    "comment": "Never silently strip. Always flag, rewrite, then re-grade."
+  },
+  "min_pass_score": 7.0
+}
