@@ -24,20 +24,31 @@ check() {
   fi
 }
 
-# Try to install missing pip deps quietly (--user, no sudo)
+# Try to install missing pip deps quietly. Cascades through PEP 668 fallbacks:
+#   --user (sandbox-friendly) -> --user --break-system-packages -> --break-system-packages
 ensure_pip_dep() {
   local mod="$1" pip_name="${2:-$1}"
   if python3 -c "import $mod" >/dev/null 2>&1; then
     ok "Python: $mod"
     return 0
   fi
-  if command -v pip3 >/dev/null 2>&1; then
-    if pip3 install --user --quiet "$pip_name" >/dev/null 2>&1; then
-      ok "Python: $mod (auto-installed)"
-      return 0
-    fi
+  if ! command -v pip3 >/dev/null 2>&1; then
+    warn "Python: $mod (no pip3 available)"
+    return 0
   fi
-  warn "Python: $mod (could not auto-install — \`pip3 install --user $pip_name\`)"
+  if pip3 install --user --quiet "$pip_name" >/dev/null 2>&1; then
+    ok "Python: $mod (auto-installed)"
+    return 0
+  fi
+  if pip3 install --user --break-system-packages --quiet "$pip_name" >/dev/null 2>&1; then
+    ok "Python: $mod (auto-installed, PEP 668)"
+    return 0
+  fi
+  if pip3 install --break-system-packages --quiet "$pip_name" >/dev/null 2>&1; then
+    ok "Python: $mod (auto-installed, system pip)"
+    return 0
+  fi
+  warn "Python: $mod (could not auto-install — try \`pip3 install --break-system-packages $pip_name\`)"
 }
 
 echo

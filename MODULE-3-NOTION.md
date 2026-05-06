@@ -79,22 +79,26 @@ Here's exactly what to do, in order. Do not skip steps. Do not ask me which OS â
 
 1. Detect my OS and home directory. Make sure ~/.claude/skills/ exists. If it doesn't, create it.
 
-2. Make a temp working dir at /tmp/selrai-marketing-install (or the OS equivalent on Windows). Create it fresh.
+2. Make a temp working dir at /tmp/selrai-marketing-install on Mac/Linux, or %TEMP%\selrai-marketing-install on Windows. If it already exists, delete it first (rm -rf or Remove-Item) so the clone is fresh.
 
 3. Clone the public repo into the temp dir:
    git clone https://github.com/lukeselr/marketing-agency-workshop /tmp/selrai-marketing-install/marketing-agency-workshop
 
-4. Run the installer. It copies the skill into ~/.claude/skills/marketing-agency, installs Python deps, runs pre-flight, builds my ~/marketing/ dashboard folder, wires every MCP (Playwright, Meta Ads, LinkedIn Ads, Gmail, Google Drive, ManyChat, GHL, Telegram, Notion, Slack, Google Sheets), and resolves external skill dependencies:
+4. Run the installer. It copies the skill into ~/.claude/skills/marketing-agency, installs Python deps (with PEP 668 fallback), runs pre-flight, builds my ~/marketing/ dashboard folder, wires every MCP (Playwright, Meta Ads, LinkedIn Ads, Gmail, Google Drive, ManyChat, GHL, Telegram, Notion, Slack, Google Sheets), and installs the /marketing-agency slash command:
    bash /tmp/selrai-marketing-install/marketing-agency-workshop/install.sh
 
-5. If a dependency is missing (git, python3, node, jq, rsync), install it via the system package manager: brew on Mac, apt on Linux, winget on Windows. Do not ask me first.
+5. If install.sh exits non-zero (pre-flight blocker), read the tail of its output, install the missing tool, then re-run install.sh. Do not ask me first. Use these commands:
+   - Mac (Homebrew): `brew install <tool>` â€” e.g. `brew install jq node python git`
+   - Linux (apt): `sudo apt-get install -y <tool>` if `sudo -n` works, else print the command for the attendee
+   - Windows (winget): `winget install --id Stenway.<Tool>` (e.g. `winget install jqlang.jq`, `winget install OpenJS.NodeJS`, `winget install Python.Python.3.12`, `winget install Git.Git`)
+   Common fixes: `node 18+` -> install Node 20 LTS. `python 3.10+` -> install Python 3.12. `jq` missing -> install jq. `git` -> usually pre-installed on Mac via Xcode CLT (`xcode-select --install`).
 
 6. Once install is green, ask me ONE question, in plain English, and only one:
    "What's your business website? Paste the URL."
 
 7. The moment I paste the URL, run:
-   bash ~/.claude/skills/marketing-agency/scripts/run.sh <THE_URL>
-   This kicks off Phase 0 + Phase 1: 14 free public-source scrapers in parallel (about 15 seconds total). They produce a 6-card business profile.
+   bash ~/.claude/skills/marketing-agency/scripts/run.sh "<THE_URL>"
+   Quote the URL so query params survive. This kicks off Phase 0 + Phase 1: 14 free public-source scrapers in parallel (about 15 seconds total). They produce a 6-card business profile at .state/business-baseline.md.
 
 8. When .state/business-baseline.md exists, render it for me as plain English and stop. Tell me:
    "Here is what we found about your business in 15 seconds from public sources. Anything wrong? Reply with corrections. Anything missing? Tell me. Otherwise say 'looks good' and we will go to Phase 2 (strategy selection)."
