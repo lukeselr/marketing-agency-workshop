@@ -22,6 +22,27 @@ fi
 mkdir -p "$HOME/.marketing-agency/tokens"
 chmod 700 "$HOME/.marketing-agency" "$HOME/.marketing-agency/tokens"
 
+# Capture MA_BUSINESS_NAME once at install time. Used as the default base for
+# every account/app/form name the Playwright specs create (MCC, OAuth, lead
+# forms, LinkedIn dev app). Written to the skill-local .env file so the specs
+# pick it up automatically via Playwright's dotenv loader.
+# Non-interactive shells (CI, piped install) silently skip and the specs fall
+# back to neutral placeholders like "My Agency MCC".
+SKILL_ENV_FILE="$SKILL_DIR/.env"
+if [ ! -f "$SKILL_ENV_FILE" ] && [ -t 0 ] && [ -z "${MA_NONINTERACTIVE:-}" ]; then
+  printf "\nWhat's your business name? Used to label your Meta/Google/LinkedIn assets (press Enter to skip): "
+  read -r MA_BIZ_INPUT
+  if [ -n "$MA_BIZ_INPUT" ]; then
+    umask 077
+    {
+      echo "# Captured at install time. Safe to edit. .gitignore excludes .env."
+      echo "MA_BUSINESS_NAME=\"$MA_BIZ_INPUT\""
+    } > "$SKILL_ENV_FILE"
+    chmod 600 "$SKILL_ENV_FILE"
+    echo "  Saved to $SKILL_ENV_FILE"
+  fi
+fi
+
 # Auto-install Python deps. macOS 14+ / Ubuntu 23.04+ have PEP 668 lockdown,
 # so we cascade --user -> --user --break-system-packages -> --break-system-packages
 # until one works.

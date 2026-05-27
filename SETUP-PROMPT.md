@@ -8,7 +8,7 @@ The prompt is deliberately aggressive: attendees already have Claude Code, the w
 
 ## The prompt (single block, copy verbatim)
 
-```javascript
+```text
 I'm in a Selr AI workshop. I have Claude Code installed, the workshop kit installed, and 86 skills loaded. Now I need you to install the marketing-agency skill and run it for me end-to-end without asking a single confirmation question. Your job is to get this done.
 
 Here's exactly what to do, in order. Do not skip steps. Do not ask me which OS — detect it. Do not ask me where files are. Do not ask me to confirm anything. Just execute.

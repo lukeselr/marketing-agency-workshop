@@ -3,7 +3,8 @@ import { test, expect } from "@playwright/test";
 
 test("02-mcc-account", async ({ page }) => {
   await page.goto("https://ads.google.com/aw/manager/start");
-  await page.getByLabel(/Manager.*account.*name/i).fill(process.env.MA_MCC_NAME || "Selr AI MCC");
+  const businessName = process.env.MA_BUSINESS_NAME || "My Agency";
+  await page.getByLabel(/Manager.*account.*name/i).fill(process.env.MA_MCC_NAME || `${businessName} MCC`);
   await page.getByRole("radio", { name: /Manage other people's accounts/i }).check();
   await page.getByLabel(/Country/i).selectOption({ label: process.env.MA_GADS_COUNTRY || "Australia" });
   await page.getByLabel(/Time zone/i).selectOption({ label: process.env.MA_TIMEZONE || "(GMT+10:00) Brisbane" });

@@ -19,7 +19,8 @@ function writeToken(platform: string, key: string, value: string) {
 
 test("01-dev-app", async ({ page }) => {
   await page.goto("https://www.linkedin.com/developers/apps/new");
-  await page.getByLabel(/App name/i).fill(process.env.MA_LI_APP_NAME || "Selr AI Marketing");
+  const businessName = process.env.MA_BUSINESS_NAME || "My Business";
+  await page.getByLabel(/App name/i).fill(process.env.MA_LI_APP_NAME || `${businessName} Marketing`);
   await page.getByLabel(/Company/i).fill(process.env.MA_LI_COMPANY_PAGE || "");
   await page.getByLabel(/Privacy policy URL/i).fill(process.env.MA_PRIVACY_URL || "https://example.com/privacy");
   // upload logo file path passed in env

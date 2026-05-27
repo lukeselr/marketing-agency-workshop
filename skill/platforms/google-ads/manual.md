@@ -12,7 +12,7 @@ accounts.google.com/signin → use the email that owns (or will own) the ad acco
 ## Step 2 — MCC (Manager) Account (skip if existing single ad account is enough)
 
 1. ads.google.com/aw/manager/start
-2. Name: e.g. "Selr AI MCC". Pick **Manage other people's accounts**.
+2. Name: e.g. "${BUSINESS_NAME} MCC" (or set `MA_MCC_NAME` env var). Pick **Manage other people's accounts**.
 3. Country, time zone, and currency = your business location (defaults shown in the spec are AU/Brisbane/AUD; override via `MA_COUNTRY`, `MA_TIMEZONE`, `MA_CURRENCY` env vars).
 4. **Submit**. Save the customer ID (10 digits).
 
@@ -28,7 +28,7 @@ accounts.google.com/signin → use the email that owns (or will own) the ad acco
 
 1. console.cloud.google.com/apis/credentials → **Configure consent screen** if missing.
    - User type: **External**.
-   - App name: e.g. "Selr AI Google Ads". Save.
+   - App name: e.g. "${BUSINESS_NAME} Google Ads" (or set `MA_GADS_OAUTH_APP_NAME`). Save.
 2. Back at credentials → **Create credentials → OAuth client ID**.
    - Application type: **Desktop app**.
    - Name: `marketing-agency-google-ads`.

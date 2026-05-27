@@ -2,7 +2,7 @@
 
 > Part of the Selr AI Workshop. You should have finished Module 1 (Workshop Kit) before running this.
 
-This is the kit attendees clone in Module 3. It installs the `marketing-agency` skill on your laptop. Once installed, type `/marketing-agency` in Claude Code and paste your business URL. In about 60 minutes you have a real ad agency replacement running locally — automatic business research, voice-graded creative, paid ads on Meta + Google + LinkedIn (PAUSED until you approve), lead lifecycle drips, weekly reports.
+This is the kit attendees clone in Module 3. It installs the `marketing-agency` skill on your laptop. Once installed, type `/marketing-agency` in Claude Code and paste your business URL. Expect 60-90 minutes of hands-on setup (you sign in to Meta / Google / LinkedIn once each) plus 1-5 days of passive verification while the platforms approve dev access. After that you have a real ad agency replacement running locally — automatic business research, voice-graded creative, paid ads on Meta + Google + LinkedIn (PAUSED until you approve), lead lifecycle drips, weekly reports.
 
 ## What it does
 
@@ -15,15 +15,17 @@ This is the kit attendees clone in Module 3. It installs the `marketing-agency` 
 ### macOS / Linux
 
 ```bash
-git clone https://github.com/lukeselr/marketing-agency-workshop ~/marketing-agency-workshop
-bash ~/marketing-agency-workshop/install.sh
+git clone https://github.com/lukeselr/marketing-agency-workshop /tmp/marketing-agency-workshop
+bash /tmp/marketing-agency-workshop/install.sh
+rm -rf /tmp/marketing-agency-workshop
 ```
 
 ### Windows
 
 ```powershell
-git clone https://github.com/lukeselr/marketing-agency-workshop $HOME\marketing-agency-workshop
-pwsh $HOME\marketing-agency-workshop\install.ps1
+git clone https://github.com/lukeselr/marketing-agency-workshop $env:TEMP\marketing-agency-workshop
+pwsh $env:TEMP\marketing-agency-workshop\install.ps1
+Remove-Item -Recurse -Force $env:TEMP\marketing-agency-workshop
 ```
 
 The installer copies the skill into `~/.claude/skills/marketing-agency/`, runs Phase 0 pre-flight, builds your `~/marketing/` dashboard folder, and wires every MCP (Playwright, Meta Ads, LinkedIn Ads, Gmail, Google Drive, ManyChat, GHL, Telegram, Notion, Slack, Google Sheets).
