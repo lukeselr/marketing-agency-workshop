@@ -16,6 +16,12 @@ PROGRESS="$STATE_DIR/meta-progress.json"
 mkdir -p "$STATE_DIR" "$TOKENS_DIR"
 chmod 700 "$TOKENS_DIR"
 
+# Load skill-local .env (captured at install time — MA_BUSINESS_NAME etc).
+# Specs read process.env, so we export everything into the child Playwright run.
+if [ -f "$SKILL_DIR/.env" ]; then
+  set -a; . "$SKILL_DIR/.env"; set +a
+fi
+
 [ -f "$PROGRESS" ] || echo '{"steps":{}}' > "$PROGRESS"
 
 run_spec() {

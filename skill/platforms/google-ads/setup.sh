@@ -9,6 +9,11 @@ PROGRESS="$STATE_DIR/google-ads-progress.json"
 
 mkdir -p "$STATE_DIR" "$TOKENS_DIR"
 chmod 700 "$TOKENS_DIR"
+
+if [ -f "$SKILL_DIR/.env" ]; then
+  set -a; . "$SKILL_DIR/.env"; set +a
+fi
+
 [ -f "$PROGRESS" ] || echo '{"steps":{}}' > "$PROGRESS"
 
 run_spec() {

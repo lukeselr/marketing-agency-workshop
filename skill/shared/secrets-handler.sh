@@ -5,6 +5,10 @@ set -u
 CC_CONFIG="$HOME/.claude.json"
 [ -f "$CC_CONFIG" ] || echo '{}' > "$CC_CONFIG"
 
+backup_cc_config() {
+  cp "$CC_CONFIG" "$CC_CONFIG.bak.$(date +%s)" 2>/dev/null || true
+}
+
 # Usage: secrets-handler.sh add-mcp <name> <command> <arg1> [arg2 ...]
 cmd="${1:-}"
 shift || true
@@ -13,6 +17,7 @@ case "$cmd" in
     name="$1"; shift
     binary="$1"; shift
     args_json=$(printf '%s\n' "$@" | jq -R . | jq -s .)
+    backup_cc_config
     jq --arg n "$name" --arg b "$binary" --argjson a "$args_json" \
       '.mcpServers[$n] = {"command": $b, "args": $a}' "$CC_CONFIG" > "$CC_CONFIG.tmp"
     mv "$CC_CONFIG.tmp" "$CC_CONFIG"
@@ -20,6 +25,7 @@ case "$cmd" in
     ;;
   remove-mcp)
     name="$1"
+    backup_cc_config
     jq --arg n "$name" 'del(.mcpServers[$n])' "$CC_CONFIG" > "$CC_CONFIG.tmp"
     mv "$CC_CONFIG.tmp" "$CC_CONFIG"
     echo "[ok] removed mcp: $name"

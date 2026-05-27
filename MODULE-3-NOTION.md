@@ -72,7 +72,7 @@ You don't have to think. Claude does the install. You paste your URL. Watch.
 
 Open Claude Code. Paste the entire block below into the prompt. Hit enter. Don't touch anything until it asks for your URL.
 
-```javascript
+```text
 I'm in a Selr AI workshop. I have Claude Code installed, the workshop kit installed, and 86 skills loaded. Now I need you to install the marketing-agency skill and run it for me end-to-end without asking a single confirmation question. Your job is to get this done.
 
 Here's exactly what to do, in order. Do not skip steps. Do not ask me which OS — detect it. Do not ask me where files are. Do not ask me to confirm anything. Just execute.

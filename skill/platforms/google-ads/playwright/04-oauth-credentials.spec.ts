@@ -25,7 +25,8 @@ test("04-oauth-credentials", async ({ page }) => {
     await page.getByRole("button", { name: /Configure consent screen/i }).click();
     await page.getByRole("radio", { name: /External/i }).check();
     await page.getByRole("button", { name: /Create/i }).click();
-    await page.getByLabel(/App name/i).fill(process.env.MA_GADS_OAUTH_APP_NAME || "Selr AI Google Ads");
+    const businessName = process.env.MA_BUSINESS_NAME || "My Business";
+    await page.getByLabel(/App name/i).fill(process.env.MA_GADS_OAUTH_APP_NAME || `${businessName} Google Ads`);
     await page.getByLabel(/User support email/i).selectOption({ index: 0 });
     await page.getByRole("button", { name: /Save and continue/i }).click();
   }
